@@ -1,7 +1,27 @@
 import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+dotenv.config();
 const app = express()
 
+app.use(cors());
+app.use(express.json()); 
 
+//Ruta principal
+app.get('/', (req, res) => {
+	res.json({ message: 'Bienvenido a la API de ejemplo' })
+})
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT , ()=> {
+	console.log(`Servidor corriendo en http://localhost:${PORT}`)
+})
+
+
+//---------------
+
+/*
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'https://example.com');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
@@ -10,9 +30,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((req, res, next) => {
-  res.status(404).send('Recurso no encontrado o ruta inválida');
-});
 
 //Middleware de aplicación
 app.use( (req, res, next) => {
@@ -20,12 +37,4 @@ app.use( (req, res, next) => {
 	next(); //Pasa el control al siguiente middleware o ruta
 })
 
-//Ruta principal
-app.get('/', (req, res) => {
-	res.send("hola desde express con middlewares!")
-})
-
-const PORT = 3000
-app.listen(PORT , ()=> {
-	console.log(`Servidor corriendo en http://localhost:${PORT}`)
-})
+*/
